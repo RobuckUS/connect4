@@ -25,7 +25,7 @@ bool Board::changeO(int x)
 		cout << "Mauvais index!" << endl;
 		return false;
 	}
-	for (int i = hauteur - 1; i >= 0; i--)
+	for (int i = hauteur-1; i >= 0; i--)
 	{
 		if (board[i][x] == '*')
 		{
@@ -43,7 +43,7 @@ bool Board::changeX(int x)
 		cout << "Mauvais index!" << endl;
 		return false;
 	}
-	for (int i = hauteur - 1; i >= 0; i--)
+	for (int i = hauteur-1; i >= 0; i--)
 	{
 		if (board[i][x] == '*')
 		{
@@ -107,6 +107,16 @@ int Board::winner()
 }
 void Board::print(ostream &s)
 {
+	for (int j = 0; j < longueur; j++)
+	{
+		s << j << " ";
+	}
+	s << endl;
+	for (int j = 0; j < longueur; j++)
+	{
+		s << "--";
+	}
+	s << endl;
 	for (int i = 0; i < hauteur; i++)
 	{
 		for (int j = 0; j < longueur; j++)

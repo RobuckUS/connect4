@@ -27,5 +27,5 @@ int main()
 	}
 	board.print(cout);
 	cout << "Grande victoire oumpique du joueur " << board.winner();
-	
+	return 0;
 }

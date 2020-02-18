@@ -20,12 +20,13 @@ Board::Board(int l, int h)
 
 bool Board::changeO(int x)
 {
+	cout << "lol" <<board[0][0] << endl;
 	if (x >= longueur)
 	{
 		cout << "Mauvais index!" << endl;
 		return false;
 	}
-	for (int i = hauteur-1; i >= 0; i--)
+	for (int i = hauteur-1; i >= 0; --i)
 	{
 		if (board[i][x] == '*')
 		{
@@ -43,7 +44,7 @@ bool Board::changeX(int x)
 		cout << "Mauvais index!" << endl;
 		return false;
 	}
-	for (int i = hauteur-1; i >= 0; i--)
+	for (int i = hauteur-1; i >= 0; --i)
 	{
 		if (board[i][x] == '*')
 		{
@@ -59,7 +60,7 @@ int Board::winner()
 	//Vérification de l'horizontale
 	for (int i = 0; i < hauteur; i++)
 	{
-		for (int j = 0; j < longueur; j++)
+		for (int j = 0; j < longueur-4; j++)
 		{
 			if (board[i][j] == 'X' && board[i][j + 1] == 'X' && board[i][j + 2] == 'X' && board[i][j + 3] == 'X')
 			{
@@ -89,15 +90,31 @@ int Board::winner()
 	}
 
 	//Vérification diagonale Haut gauche a en bas droite
-	for (int i = 0; i < hauteur; i++)
+	for (int i = 0; i < hauteur-3; i++)
 	{
-		for (int j = 0; j < longueur; j++)
+		for (int j = 0; j < longueur-3; j++)
 		{
-			if (board[i][j] == 'X' && board[i - 1][j - 1] == 'X' && board[i - 2][j - 2] == 'X'&& board[i - 3][j - 3] == 'X')
+			if (board[i][j] == 'X' && board[i + 1][j + 1] == 'X' && board[i + 2][j + 2] == 'X'&& board[i + 3][j + 3] == 'X')
 			{
 				return playerX;
 			}
-			if (board[i][j] == 'O' && board[i - 1][j - 1] == 'O' && board[i - 2][j - 2] == 'O' && board[i - 3][j - 3] == 'O')
+			if (board[i][j] == 'O' && board[i + 1][j + 1] == 'O' && board[i + 2][j + 2] == 'O' && board[i + 3][j + 3] == 'O')
+			{
+				return playerO;
+			}
+		}
+	}
+
+	//Verification diagonale haut droite a bas gauche
+	for (int i = 0; i < hauteur - 3; i++)
+	{
+		for (int j = longueur - 1; j >= 3; j--)
+		{
+			if (board[i][j] == 'X' && board[i + 1][j - 1] == 'X' && board[i + 2][j - 2] == 'X'&& board[i + 3][j - 3] == 'X')
+			{
+				return playerX;
+			}
+			if (board[i][j] == 'O' && board[i + 1][j - 1] == 'O' && board[i + 2][j - 2] == 'O' && board[i + 3][j - 3] == 'O')
 			{
 				return playerO;
 			}
@@ -105,6 +122,7 @@ int Board::winner()
 	}
 	return personne;
 }
+
 void Board::print(ostream &s)
 {
 	for (int j = 0; j < longueur; j++)
@@ -126,4 +144,3 @@ void Board::print(ostream &s)
 		s << endl;
 	}
 }
-//if (this.list[j][i].getFill() == Color.YELLOW && this.list[j + 1][i].getFill() == Color.YELLOW && this.list[j + 2][i].getFill() == Color.YELLOW && this.list[j + 3][i].getFill() == Color.YELLOW) {

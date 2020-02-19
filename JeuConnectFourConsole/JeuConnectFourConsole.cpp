@@ -4,10 +4,6 @@
 using namespace std;
 int main()
 {
-<<<<<<< HEAD
-	
-}
-=======
 	Board board = Board();
 	char input;
 	while (board.winner() == personne)
@@ -34,4 +30,3 @@ int main()
 	cout << "Grande victoire oumpique du joueur " << board.getChar(board.winner());
 	return 0;
 }
->>>>>>> Avancement_Thierry

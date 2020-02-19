@@ -6,7 +6,7 @@ int main()
 {
 	Board board = Board();
 	char input;
-	while (board.winner() == personne)
+	while (board.winner().getName()._Equal("null"))
 	{
 		input = _getch();
 		if (input == 'a')
@@ -26,7 +26,8 @@ int main()
 		board.print(cout);
 	}
 	system("cls");
-	board.print(cout);
-	cout << "Grande victoire oumpique du joueur " << board.getChar(board.winner());
+	
+
+	cout << "Le gagnant est: " << board.winner().getName();
 	return 0;
 }

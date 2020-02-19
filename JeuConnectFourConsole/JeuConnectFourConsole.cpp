@@ -1,31 +1,32 @@
 #include <iostream>
+#include <conio.h>
 #include "ClassBoard.h"
 using namespace std;
 int main()
 {
 	Board board = Board();
-	int player = playerX;
-	int index;
-	while (board.winner()==0)
+	char input;
+	while (board.winner() == personne)
 	{
+		input = _getch();
+		if (input == 'a')
+		{
+			board.decrement();
+		}
+		else if (input == 'd')
+
+		{
+			board.increment();
+		}
+		else if (input == 's')
+		{
+			board.drop();
+		}
+		system("cls");
 		board.print(cout);
-		if (player == playerX)
-		{
-			cout << "Tour au joueur de X, Selectionner index entre 0 et 5" << endl;
-			cin >> index;
-			if(board.changeX(index))
-				player = playerO;
-		}
-		else
-		{
-			cout << "Tour au joueur de O, Selectionner index entre 0 et 5" << endl;
-			cin >> index;
-			board.changeO(index);
-			player = playerX;
-		}
-		
 	}
+	system("cls");
 	board.print(cout);
-	cout << "Grande victoire oumpique du joueur " << board.winner();
+	cout << "Grande victoire oumpique du joueur " << board.getChar(board.winner());
 	return 0;
 }

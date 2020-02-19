@@ -4,6 +4,7 @@ Board::Board(int l, int h)
 {
 	longueur = l;
 	hauteur = h;
+	player = playerX;
 	board = new char*[hauteur];
 	for (int i = 0; i < hauteur; i++)
 	{
@@ -16,11 +17,11 @@ Board::Board(int l, int h)
 			board[i][j] = '*';
 		}
 	}
+	print(cout);
 }
 
 bool Board::changeO(int x)
 {
-	cout << "lol" <<board[0][0] << endl;
 	if (x >= longueur)
 	{
 		cout << "Mauvais index!" << endl;
@@ -55,12 +56,60 @@ bool Board::changeX(int x)
 	cout << "rangee pleine!" << endl;
 	return false;
 }
+void Board::increment()
+{
+	if (idx < longueur - 1)
+	{
+		idx++;
+	}
+}
+void Board :: decrement()
+{
+	if (idx > 0)
+	{
+		idx--;
+	}
+}
+void Board::drop()
+{
+	if (player == playerX)
+	{
+		if (changeX(idx))
+			player = playerO;
+	}
+	else
+	{
+		if (changeO(idx))
+			player = playerX;
+	}
+	
+}
+char Board::getChar(int player)
+{
+	if (playerO == player)
+	{
+		return 'O';
+	}
+	else if (playerX == player)
+	{
+		return 'X';
+	}
+	else if (gagnant == player)
+	{
+		return'w';
+	}
+	else
+	{
+		cout << "Matt, don't play with 3 players please." << endl;
+		return NULL;
+	}
+}
 int Board::winner()
 {
 	//Vérification de l'horizontale
 	for (int i = 0; i < hauteur; i++)
 	{
-		for (int j = 0; j < longueur-4; j++)
+		for (int j = 0; j < longueur-3; j++)
 		{
 			if (board[i][j] == 'X' && board[i][j + 1] == 'X' && board[i][j + 2] == 'X' && board[i][j + 3] == 'X')
 			{
@@ -125,22 +174,29 @@ int Board::winner()
 
 void Board::print(ostream &s)
 {
-	for (int j = 0; j < longueur; j++)
+	s << " ";
+	for (int i = 0; i < idx; i++)
 	{
-		s << j << " ";
+		s << "  ";
 	}
+	s << getChar(player);
 	s << endl;
-	for (int j = 0; j < longueur; j++)
+	
+	s << " ";
+	for (int j = 0; j < longueur-1; j++)
 	{
 		s << "--";
 	}
+	s << "-";
 	s << endl;
 	for (int i = 0; i < hauteur; i++)
 	{
 		for (int j = 0; j < longueur; j++)
 		{
-			s << board[i][j] << " ";
+			s << " " << board[i][j] ;
 		}
 		s << endl;
 	}
 }
+
+

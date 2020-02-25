@@ -4,7 +4,6 @@ Board::Board(int l, int h)
 {
 	longueur = l;
 	hauteur = h;
-	player = playerX;
 	board = new char*[hauteur];
 	for (int i = 0; i < hauteur; i++)
 	{
@@ -17,6 +16,17 @@ Board::Board(int l, int h)
 			board[i][j] = '*';
 		}
 	}
+	cout << "Entrer le nom du premier joueur" << endl;
+	string name1;
+	cin >> name1;
+	system("cls");
+	v.push_back(Player(name1, playerX));
+	cout << "Entrer le nom du deuxieme joueur" << endl;
+	string name2;
+	cin >> name2;
+	system("cls");
+	v.push_back(Player(name2, playerO));
+	currentPlayer = v[0];
 	print(cout);
 }
 
@@ -72,15 +82,15 @@ void Board :: decrement()
 }
 void Board::drop()
 {
-	if (player == playerX)
+	if (currentPlayer.getPlayerType() == playerX)
 	{
 		if (changeX(idx))
-			player = playerO;
+			currentPlayer = v[1];
 	}
 	else
 	{
 		if (changeO(idx))
-			player = playerX;
+			currentPlayer = v[0];
 	}
 	
 }
@@ -104,7 +114,7 @@ char Board::getChar(int player)
 		return NULL;
 	}
 }
-int Board::winner()
+Player Board::winner()
 {
 	//Vérification de l'horizontale
 	for (int i = 0; i < hauteur; i++)
@@ -113,11 +123,11 @@ int Board::winner()
 		{
 			if (board[i][j] == 'X' && board[i][j + 1] == 'X' && board[i][j + 2] == 'X' && board[i][j + 3] == 'X')
 			{
-				return playerX;
+				return v[0];
 			}
 			else if(board[i][j] == 'O' && board[i][j + 1] == 'O' && board[i][j + 2] == 'O' && board[i][j + 3] == 'O')
 			{
-				return playerO;
+				return v[1];
 			}
 		}
 	}
@@ -129,11 +139,11 @@ int Board::winner()
 		{
 			if (board[i][j] == 'X' && board[i - 1][j] == 'X' && board[i - 2][j] == 'X' && board[i - 3][j] == 'X')
 			{
-				return playerX;
+				return v[0];
 			}
 			if (board[i][j] == 'O' && board[i - 1][j] == 'O' && board[i - 2][j] == 'O' && board[i - 3][j] == 'O')
 			{
-				return playerO;
+				return v[1];
 			}
 		}
 	}
@@ -145,11 +155,11 @@ int Board::winner()
 		{
 			if (board[i][j] == 'X' && board[i + 1][j + 1] == 'X' && board[i + 2][j + 2] == 'X'&& board[i + 3][j + 3] == 'X')
 			{
-				return playerX;
+				return v[0];
 			}
 			if (board[i][j] == 'O' && board[i + 1][j + 1] == 'O' && board[i + 2][j + 2] == 'O' && board[i + 3][j + 3] == 'O')
 			{
-				return playerO;
+				return v[1];
 			}
 		}
 	}
@@ -161,25 +171,28 @@ int Board::winner()
 		{
 			if (board[i][j] == 'X' && board[i + 1][j - 1] == 'X' && board[i + 2][j - 2] == 'X'&& board[i + 3][j - 3] == 'X')
 			{
-				return playerX;
+				return v[0];
 			}
 			if (board[i][j] == 'O' && board[i + 1][j - 1] == 'O' && board[i + 2][j - 2] == 'O' && board[i + 3][j - 3] == 'O')
 			{
-				return playerO;
+				return v[1];
 			}
 		}
 	}
-	return personne;
+	
+	return nullP;
 }
 
 void Board::print(ostream &s)
 {
+	s << "Appuyer sur A pour deplacer vers la gauche, D pour deplacer vers la droite et S pour dropper" << endl;
+	s << "Au tours de " << currentPlayer.getName() << endl;
 	s << " ";
 	for (int i = 0; i < idx; i++)
 	{
 		s << "  ";
 	}
-	s << getChar(player);
+	s << getChar(currentPlayer.getPlayerType());
 	s << endl;
 	
 	s << " ";
@@ -198,5 +211,4 @@ void Board::print(ostream &s)
 		s << endl;
 	}
 }
-
 

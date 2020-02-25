@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "Player.h"
 #define personne 0
 #define gagnant 12
 #define playerX 1
@@ -16,13 +18,15 @@ public:
 	void decrement();
 	void drop();
 	char getChar(int player);
-	int winner();
+	Player winner();
 	void print(ostream &os);
-
+	
 private:
-	int player;
 	int longueur;
 	int hauteur;
 	int idx;
 	char **board;
+	Player currentPlayer;
+	vector<Player> v;
+	Player nullP = Player("null");
 };

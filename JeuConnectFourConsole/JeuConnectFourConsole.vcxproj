@@ -153,9 +153,11 @@
   <ItemGroup>
     <ClCompile Include="ClassBoard.cpp" />
     <ClCompile Include="JeuConnectFourConsole.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassBoard.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

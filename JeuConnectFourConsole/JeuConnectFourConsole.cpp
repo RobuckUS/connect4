@@ -13,12 +13,12 @@ int main()
 		{
 			board.decrement();
 		}
-		else if (input == 'd')
+		else if (input == 'd' )
 
 		{
 			board.increment();
 		}
-		else if (input == 's')
+		else if (input == 's' )
 		{
 			board.drop();
 		}
